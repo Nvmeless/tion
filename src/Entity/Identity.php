@@ -2,12 +2,18 @@
 
 namespace App\Entity;
 
-use App\Repository\IdentityRepository;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\IdentityRepository;
+use App\Traits\StatisticsPropertiesTrait;
 
 #[ORM\Entity(repositoryClass: IdentityRepository::class)]
+#[ORM\HasLifecycleCallbacks]
 class Identity
 {
+
+    use StatisticsPropertiesTrait;
+
+
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
@@ -15,6 +21,8 @@ class Identity
 
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $email = null;
+
+
 
     public function getId(): ?int
     {
