@@ -6,6 +6,7 @@ use DateTime;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\HistoryRepository;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: HistoryRepository::class)]
 class History
@@ -24,6 +25,7 @@ class History
     private ?HistoryContextType $subcontext = null;
 
     #[ORM\Column(nullable: true)]
+    #[Assert\NotBlank(message: "le payload doit etre null ou  etre un JSON")]
     private ?array $payload = null;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
